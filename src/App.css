@@ -1,7 +1,9 @@
 .App {
   text-align: center;
   height: 100%;
+  font-family: roboto, sans-serif;
   width: 100%;
+  box-sizing: border-box !important;
 }
 
 .App-logo {
@@ -10,7 +12,7 @@
 }
 
 .App main {
-  margin-top: 4rem;
+  /* margin-top: 4rem; */
   width: 100%;
   height: 100%;
 }
@@ -18,6 +20,7 @@
 main {
   max-width: 1600px;
   margin: auto;
+  /* box-sizing: border-box !important; */
   /* height: 100%; */
 }
 
@@ -27,8 +30,88 @@ main {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 1001;
-  top: 0
+  top: 0;
+  left: 0
 }
+
+.header-container {
+  position: fixed;
+  display: flex;
+  /* padding: 0.5rem; */
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  height: 3rem;
+  width: 100%;
+  max-width: 1600px;
+  background-color: #3f51b5;
+  z-index: 1000;
+  box-shadow: 0 1px 20px 0 gray;
+}
+
+.header-box {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1000
+}
+
+.tool-bar {
+  /* position: fixed;  */
+  flex: 0.2;
+  height: 100%; 
+  display: none;
+  flex-direction: column;
+  width: 3rem;
+  background: rgba(0, 0, 0, 0.15); 
+  padding-top: 5rem;
+  flex-direction: column;
+  align-items: center;
+  /* margin-top: 5rem; */
+  /* justify-content: center; */
+}
+
+.main {
+  flex: 1;
+  justify-self: center;
+    overflow-y: scroll;
+}
+
+.tool-bar  div:first-child {
+  margin-top: 5rem;
+}
+
+.tool-bar i {
+  /* margin-bottom: 2rem; */
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: gray;
+}
+
+.tool-bar > div:hover {
+  background-color:lightgrey;
+}
+
+.tool-bar i:hover {
+  color: black;
+}
+
+@media(min-width: 800px) {
+  .tool-bar {
+      display: flex;
+      /* border-right: 1px solid gray; */
+  }
+
+  .main {
+    flex: 0.8;
+    overflow-y: scroll;
+  }
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react"
 import MUIDataTable from "mui-datatables"
-import styles from "./CandidateList.module.css"
+import styles from "./ConvertedCandidates.module.css"
 import Call from "../../ui/Call/Call"
-import { getCandidateList } from "../../service/CandidateService"
+import { getConvertedCandidateList } from "../../service/CandidateService"
 import Title from "../../ui/Title/Title"
-import { Details } from "@material-ui/icons"
 
 
-const CandidateList = (props) => {
+const ConvertedCandidates = (props) => {
 
     const [isCall, setIsCall] = useState(false)
     const [phoneNumber, setPhoneNumber] = useState("")
@@ -15,7 +14,7 @@ const CandidateList = (props) => {
     const [data, setData] = useState([])
     
     useEffect(() =>{
-        getCandidateList()
+        getConvertedCandidateList()
         .then(res => {
             if(res.status === 200) {
                 setData(res.data)
@@ -50,17 +49,17 @@ const CandidateList = (props) => {
           sort: false,
          }
         },
-        {
-            name: "details",
-            label: "Current Teacher",
-            options: {
-             filter: true,
-             sort: false,
-             customBodyRender: (value) => {
-             return <p>{value[0].Name}</p>
-             }
-            }
-           },
+        // {
+        //     name: "details",
+        //     label: "Current Teacher",
+        //     options: {
+        //      filter: true,
+        //      sort: false,
+        //      customBodyRender: (value) => {
+        //      return <p>{value[0].Name}</p>
+        //      }
+        //     }
+        //    },
         {
             name: "percentage",
             label: "Percentage",
@@ -147,11 +146,11 @@ const CandidateList = (props) => {
         };
        
         return (
-            <>
+            <div style={{marginTop: "2rem"}}>
              <Title
-             hideButton={localStorage.getItem("type") !== "admin"}
+             hideButton={true}
             onClick={onAddStudent} 
-            title="Allocated Candidates" />
+            title="Converted Candidates" />
             {
                 isCall ?
                 <Call
@@ -162,14 +161,14 @@ const CandidateList = (props) => {
             }
                 <div className={styles['table']}>
                     <MUIDataTable
-                    title={"Allocated Candidates"}
+                    title={"Converted Candidates"}
                     data={data}
                     columns={columns}
                     options={options}
                     />
                 </div>
-            </>
+            </div>
             )
 }
 
-export default CandidateList
+export default ConvertedCandidates

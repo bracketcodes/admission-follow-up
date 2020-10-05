@@ -4,8 +4,8 @@
     top: 0;
     z-index: 1002;
     height: 100vh;
-    width: 80%;
-    max-width: 250px;
+    width: 100%;
+    max-width: 270px;
     background-color: white;
     overflow-y: scroll;
     transform: translateX(-250px);

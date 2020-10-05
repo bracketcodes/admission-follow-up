@@ -1,0 +1,23 @@
+.inputContainer {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputContainer input {
+
+}
+
+label {
+    display: block;
+    text-align: left;
+}
+
+@media(min-width: 600px) {
+    .inputContainer {
+        width: 25rem;
+    }
+}

@@ -1,8 +1,8 @@
 .header-container {
     position: fixed;
     display: flex;
-    padding: 0.5rem;
-    justify-content: space-between;
+    /* padding: 0.5rem; */
+    justify-content: flex-end;
     align-items: center;
     top: 0;
     height: 3rem;
@@ -19,13 +19,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000
 }
 
 .tool-bar {
     position: fixed; 
     left: 0;
     height: 100%; 
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 3rem;
     background: rgba(0, 0, 0, 0.15); 
@@ -42,4 +45,10 @@
 
 .tool-bar i:hover {
     color: black;
+}
+
+@media(min-width: 800px) {
+    .tool-bar {
+        display: flex;
+    }
 }

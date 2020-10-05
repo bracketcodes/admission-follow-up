@@ -33,7 +33,7 @@ const SideBar = (props) => {
                             props.history.push(el.url)
                         }} 
                         key={i}>
-                            <i className="fa fa-home"/>
+                            <i className={el.className}/>
                             {el.name.toUpperCase()}
                         </li>)
                     }) : 

@@ -1,8 +1,10 @@
 import axios from "axios"
+import { BASE_URL } from "./constants";
 
 export const getCandidateList = () => {
+    return axios.get(`${BASE_URL}/student/list/1`)
 
-    return axios.get('https://f7c29884d5b6.ngrok.io/call/list')
+    // return axios.get('https://f7c29884d5b6.ngrok.io/call/list')
     // .then((res) => {
 
     // })
@@ -12,9 +14,38 @@ export const getCandidateList = () => {
 
 
     // return [
-    //     { name: "Joe James", phoneNumber: 9876543210, city: "Yonkers", state: "NY" },
-    //     { name: "John Walsh", phoneNumber: 9876543210, city: "Hartford", state: "CT" },
-    //     { name: "Bob Herm", phoneNumber: 9876543210, city: "Tampa", state: "FL" },
-    //     { name: "James Houston", phoneNumber: 9876543210, city: "Dallas", state: "TX" },
+    //     { Name: "Joe James", PhoneNumber: 9876543210, Percentage: "30", state: "NY", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "John Walsh", PhoneNumber: 9876543210, Percentage: "40", state: "CT", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "Bob Herm", PhoneNumber: 9876543210, Percentage: "80", state: "FL", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "James Houston", PhoneNumber: 9876543210, Percentage: "50", state: "TX", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "Joe James", PhoneNumber: 9876543210, Percentage: "30", state: "NY", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "John Walsh", PhoneNumber: 9876543210, Percentage: "40", state: "CT", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "Bob Herm", PhoneNumber: 9876543210, Percentage: "80", state: "FL", currentFollower: "Mark",department: "Engineering" },
+    //     { Name: "James Houston", PhoneNumber: 9876543210, Percentage: "50", state: "TX", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "Joe James", PhoneNumber: 9876543210, Percentage: "30", state: "NY", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "John Walsh", PhoneNumber: 9876543210, Percentage: "40", state: "CT", currentFollower: "Mark", department: "Engineering" },
+    //     { Name: "Bob Herm", PhoneNumber: 9876543210, Percentage: "80", state: "FL", currentFollower: "Mark",department: "Engineering" },
+    //     { Name: "James Houston", PhoneNumber: 9876543210, Percentage: "50", state: "TX", currentFollower: "Mark", department: "Engineering" },
     // ];
+}
+
+export const addCandidate = (student) => {
+    return axios.post(`${BASE_URL}/student/add`, student)
+}
+
+export const getUnAllocatedCandidates = () => {
+    return axios.get(`${BASE_URL}/student/list/0`)
+}
+
+export const updateStudentInfo = (studentId, data) => {
+    console.log(data)
+    return axios.post(`${BASE_URL}/student/updateInfo/${studentId}`, data)
+}
+
+export const getConvertedCandidateList = () => {
+    return axios.get(`${BASE_URL}/student/converted`)
+}
+
+export const getInterestedCandidateList = () => {
+    return axios.get(`${BASE_URL}/student/interested`)
 }

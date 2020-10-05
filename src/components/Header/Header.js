@@ -3,10 +3,12 @@ import styles from "./Header.module.css"
 import Backdrop from "../../ui/Backdrop/Backdrop"
 import SideBar from "../../ui/Backdrop/SideBar/SideBar"
 import HeaderLogo from "../../ui/HeaderLogo/HeaderLogo"
-import {getNavLinks} from "../../service/SideBarService"
+import { getNavLinks, teacherNavLink} from "../../service/SideBarService"
+import { withRouter } from "react-router-dom"
+import { getThemeProps } from "@material-ui/styles"
 
 
-const Header = (params) => {
+const Header = (props) => {
     const [isBackdrop, setIsBackdrop] = useState(false) 
     const [navLink, setNavLink] = useState([])
 
@@ -15,7 +17,12 @@ const Header = (params) => {
     }
 
     useEffect(() => {
-        setNavLink(getNavLinks())
+        if(localStorage.getItem("type").toLowerCase() === "admin") {
+            console.log("hello")
+            setNavLink(getNavLinks())
+        } else {
+            setNavLink(teacherNavLink())
+        }
     }, [])
 
     return (
@@ -33,18 +40,21 @@ const Header = (params) => {
                 null
             }
             <div className={styles['header-box']}>
-                <div className={styles['tool-bar']}>
+                {/* <div className={styles['tool-bar']}>
                     <i className="fa fa-home"/>
                     <i className="fa fa-users"/>
-                </div>
+                </div> */}
                 <header className={styles['header-container']}>
-                    <HeaderLogo
+                    {/* <HeaderLogo
                     toggleBackDrop={toggleBackDrop}
-                    />
+                    /> */}
+                    <p
+                    onClick={() => {localStorage.clear(); window.location.reload()}} 
+                    style={{color: "white", fontWeight: "bold", marginRight: "1.5rem", cursor: "pointer"}}>Sign out</p>
                 </header>
             </div>
         </>
     )
 }
 
-export default Header
+export default withRouter(Header)

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css"
 import { withRouter } from "react-router-dom"
+import login from "../../service/LoginService"
 
 
 const Login = (props) => {
@@ -10,13 +11,27 @@ const Login = (props) => {
     const [isInvalidLogin, setIsInvalidLogin] = useState(false)
 
     const onLogin = () => {
-        if(userName == "admin" && password == "admin") {
-            localStorage.setItem('isLoggedIn', 1)
+        login(userName, password)
+        .then(res => {
+            if(res['type']) {
+                localStorage.setItem('isLoggedIn', 1)
+                localStorage.setItem('type', res['type'])
+                props.history.push('/home')
+
+            } else if(res.data === 'login fail') {
+
+            } else  {
+                localStorage.setItem('isLoggedIn', 1)
+                localStorage.setItem("type", "teacher")
+                localStorage.setItem("_id", res.data[0]._id)
+                localStorage.setItem("phoneNumber", res.data[0].PhoneNumber)
+                props.history.push('/home')
+            }
             props.setIsLoggedIn(localStorage.getItem('isLoggedIn'))
-            props.history.push('/home')
-        } else{
-            setIsInvalidLogin(true)
-        }
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -43,11 +58,13 @@ const Login = (props) => {
                 </div>
                 <form>
                     <input
+                    style={{boxShadow: "0 0 0 0"}}
                     placeholder="Username"
                     value={userName}
                     onChange={(event) => {setUserName(event.target.value)}}
                     />
                     <input
+                    style={{boxShadow: "0 0 0 0"}}
                     placeholder="Password"
                     type="password"
                     value={password}
@@ -55,6 +72,7 @@ const Login = (props) => {
                     />
                 </form>
                 <button
+                className="button"
                 onClick={onLogin}
                 style={{backgroundColor: !userName || !password ? "lightgray" : "blue"}}
                 disabled={!userName || !password}

@@ -1,0 +1,17 @@
+.alert-box {
+    height: 50%;
+    width: 80%;
+    max-width: 30rem;
+    max-height: 15rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.alert-box p{
+    text-align: center;
+    margin-top: 2rem;
+}

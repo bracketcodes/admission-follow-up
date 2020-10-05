@@ -6,13 +6,28 @@ import { Route, Router, Switch, Redirect } from 'react-router-dom';
 import Home from './components/Home/Home';
 import CandidateList from './components/CandidateList/CandidateList';
 import Login from './components/Login/Login';
+import Admin from "./components/Home/Admin/routes"
+import SideBar from './ui/Backdrop/SideBar/SideBar';
+import HeaderLogo from "./ui/HeaderLogo/HeaderLogo"
+
 
 function App() {
+  const [navLink, setNavLink] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'))
+  const [isBackdrop, setIsBackdrop] = useState(false) 
+
+  const toggleBackDrop = () => {
+      setIsBackdrop(!isBackdrop)
+  }
+
+  // useEffect(() => {
+  //     setNavLink(getNavLinks())
+  // }, [])
+
 
   const loginRender = () => {
     if(isLoggedIn) {
-      return <Redirect to="home"/> 
+      return <Redirect to="/"/> 
     }
     
     return <Login setIsLoggedIn={setIsLoggedIn}/>
@@ -26,15 +41,16 @@ function App() {
          : null
         }
         <>
-          <main style={{marginTop: isLoggedIn ? "4rem" : 0}}>
+          <main>
             <Switch>
               <Route path="/login" render={loginRender}/>
               {
                 isLoggedIn ?
+                  
                 <Switch>
-                  <Route path="/home" component={Home}/>
-                  <Route path="/candidates" component={CandidateList}/>
-                  <Redirect to="/home"/>
+                  <Route path="/" component={Admin}/>
+                  {/* <Route path="/candidates" component={CandidateList}/> */}
+                  <Redirect to="/"/>
                 </Switch>: 
                 null
               }
