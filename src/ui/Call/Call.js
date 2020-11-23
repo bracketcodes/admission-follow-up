@@ -92,6 +92,7 @@ const Call = (props) => {
                     teacher_id: localStorage.getItem('id'),
                     whyInterested: whyInterested.value,
                     category: isEngineering.value,
+                    Catogory: isEngineering.value,
                     departmentPreference: department.value,
                     isInterested: isInterested.value.toLowerCase() === "yes",
                     isConvertable: isConvertable.value.toLowerCase() === "yes",
@@ -135,62 +136,62 @@ const Call = (props) => {
     }
     
     useEffect(() => {
-        navigator.mediaDevices.getUserMedia({audio: {
-            echoCancellation: true
-        }})
-        .then((res) => {
-            let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6InNjb3BlOmNsaWVudDpvdXRnb2luZz9hcHBTaWQ9QVAxMGI1MjRiODg3ZmZhZjFiZTg1ZjVjNGJkOTFiNGI0OSIsImlzcyI6IkFDZmZiNmNmNjg3ODc2NzlmMGMzMzE4MzZkZTIxZmZhMjkiLCJleHAiOjE1OTYxNDA2MTcsImlhdCI6MTU5NjEzNzAxN30.V4s00sjfOAqZ6wBNOAUfqUV_zSw7fk_eSvj0b3XKOwo'
+        // navigator.mediaDevices.getUserMedia({audio: {
+        //     echoCancellation: true
+        // }})
+        // .then((res) => {
+        //     let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6InNjb3BlOmNsaWVudDpvdXRnb2luZz9hcHBTaWQ9QVAxMGI1MjRiODg3ZmZhZjFiZTg1ZjVjNGJkOTFiNGI0OSIsImlzcyI6IkFDZmZiNmNmNjg3ODc2NzlmMGMzMzE4MzZkZTIxZmZhMjkiLCJleHAiOjE1OTYxNDA2MTcsImlhdCI6MTU5NjEzNzAxN30.V4s00sjfOAqZ6wBNOAUfqUV_zSw7fk_eSvj0b3XKOwo'
             
-            axios.post('https://e19406e9dc45.ngrok.io/token/generate')
-            .then((res) => {
-                // console.log(res.data.to)
-                setToken(res.data.token)
+        //     axios.post('https://e19406e9dc45.ngrok.io/token/generate')
+        //     .then((res) => {
+        //         // console.log(res.data.to)
+        //         setToken(res.data.token)
                 
-                device.setup(res.data.token, {
-                    enableRingingState: true
-                })
-                
-
-                device.on('ready', () => {
-                    setIsReady(true)
-                    // console.log('ready')
-                    // setConnection(device.connect({phoneNumber: props.phoneNumber}))
-                })
-
-                device.on('error', () =>{
-                    device.destroy()
-                    // props.toggleCall(false)
-                })
-                
-                device.on('cancel', () =>{
-                    device.destroy()
-                    // props.toggleCall(false)
-                    console.log('cancel')
-                })
+        //         device.setup(res.data.token, {
+        //             enableRingingState: true
+        //         })
                 
 
-                device.on('disconnect', () => {
-                    device.destroy()
-                    console.log('disconnected')
-                    // props.toggleCall(false)
-                })
+        //         device.on('ready', () => {
+        //             setIsReady(true)
+        //             // console.log('ready')
+        //             // setConnection(device.connect({phoneNumber: props.phoneNumber}))
+        //         })
+
+        //         device.on('error', () =>{
+        //             device.destroy()
+        //             // props.toggleCall(false)
+        //         })
+                
+        //         device.on('cancel', () =>{
+        //             device.destroy()
+        //             // props.toggleCall(false)
+        //             console.log('cancel')
+        //         })
+                
+
+        //         device.on('disconnect', () => {
+        //             device.destroy()
+        //             console.log('disconnected')
+        //             // props.toggleCall(false)
+        //         })
         
-                device.on('connect', () =>{
-                    setIsPhone(true)
-                    console.log('connected')
-                })
+        //         device.on('connect', () =>{
+        //             setIsPhone(true)
+        //             console.log('connected')
+        //         })
 
-                // setToken(res.data.token)
-            })
-            .catch((err) => {
-                console.log(err)
-                // props.toggleCall(false)
-            })
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-        setCallStartTime(new Date())
+        //         // setToken(res.data.token)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //         // props.toggleCall(false)
+        //     })
+        // })
+        // .catch((err) => {
+        //     console.log(err)
+        // })
+        // setCallStartTime(new Date())
     }, [])
 
     const toggleMute = () => {

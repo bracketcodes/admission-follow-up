@@ -63,18 +63,18 @@ const Admin = (props) => {
             <div className='main'>
             <Switch>
                 <Route path="/candidates/add" render={() => {
-                    if(isAdmin) {
+                    // if(isAdmin) {
                         return <AddCandidate/>
-                    } else {
-                        return <Redirect to="/viewAllocatedCandidates"/>
-                    }
+                    // } else {
+                    //     return <Redirect to="/viewAllocatedCandidates"/>
+                    // }
                 }}/>
                 <Route path="/candidates/update" render={() => {
-                    if(isAdmin) {
+                    // if(isAdmin) {
                         return <AddCandidate/>
-                    }else {
-                        return <Redirect to="/viewAllocatedCandidates"/>
-                    }
+                    // }else {
+                    //     return <Redirect to="/viewAllocatedCandidates"/>
+                    // }
                 }}/>
                 <Route path="/candidates" render={() => {
                     if(isAdmin) {
