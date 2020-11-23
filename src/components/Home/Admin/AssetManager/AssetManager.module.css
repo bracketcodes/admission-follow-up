@@ -1,0 +1,54 @@
+.asset-block {
+    height: auto;
+    width: 100%;
+    position: relative
+}
+
+.onAdd {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputContainer {
+    height: auto;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 5rem;
+}
+
+.inputContainer input {
+    width: 50%;
+    margin: auto;
+    margin-top: 1rem;
+    display: block;
+}
+
+.inputContainer label{
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: gray;
+    margin-bottom: 1rem;
+}
+
+.inputContainer input[type="file"] {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.asset-grid {
+    height: 300px;
+    width: 45%;
+    border-radius: 5px;
+    margin: 1rem;
+    background-color: white;
+}
+
+.asset-grid p {
+    height: 20%;
+}

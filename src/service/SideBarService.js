@@ -5,21 +5,15 @@ export const getNavLinks = (logo) => {
         className: "fa fa-home"
     },
     {
-        name: 'Unallocated Candidates',
+        name: 'Candidates',
         url: "/candidates",
         className: "fa fa-hand-holding-water"
 
     },
     {
-        name: 'Allocated Candidates',
-        url: "/viewAllocatedCandidates",
-        className: "fa fa-check-circle"
-
-    },
-    {
         name: 'converted Candidates',
         url: "/convertedCandidates",
-        className: "fa fa-check-double"
+        className: "fa fa-check-circle"
 
     },
     {
@@ -27,6 +21,14 @@ export const getNavLinks = (logo) => {
         url: "/staffs",
         className: "fa fa-user-tie"
 
+    },{
+        name: 'assets',
+        url: '/assets',
+        className: 'fa fa-file-image'
+    },{
+        name: 'whatsapp-broadcast',
+        url: '/whatsapp-broadcast',
+        className: 'fa fa-bullhorn'
     }]
 }
 

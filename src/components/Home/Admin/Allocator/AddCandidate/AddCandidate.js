@@ -105,11 +105,12 @@ const AddCandidate = (props) => {
     const [isViewAllocated, setIsViewAllocated] = useState(false)
     const [isViewCallHistory, setIsViewCallHistory] = useState(false)
     const [isFileUpload, setIsFileUpload] = useState(false)
-    const [fileValue, setFileValue] = useState(false)
+    const [fileValue, setFileValue] = useState()
     const [noOfStudents, setNoOfStudents] = useState({
         value: props.location.state ? props.location.state[3] : 0
     })
     const [isViewCallDetail, setIsViewCallDetail] = useState(false)
+    const [missingColumn, setMissingColumn] = useState('')
     const callHistoryColumn = [
         // {
         //     name: "Name",
@@ -207,7 +208,7 @@ const AddCandidate = (props) => {
                 setIsInitiated(true)
                 addCandidate({
                     "Name": name.value,
-                    "PhoneNumber": parseInt(phoneNumber.value),
+                    "PhoneNumber": parseInt('91' + phoneNumber.value),
                     "Catagory": department.value,
                     "percentage": percentage.value
                 })
@@ -230,7 +231,18 @@ const AddCandidate = (props) => {
 
     const handleFileRead = (e) => {
         const content = fileReader.result
-        console.log(content)
+        try {
+            let columns = String(content).split(/\r\n|\n/)[0].toLowerCase()
+            for (let column of ['name', 'phone number', 'percentage', 'department']) {
+                if(columns.indexOf(column) === -1) {
+                    setMissingColumn(column)
+                    throw Error
+                }
+            } 
+            setMissingColumn('')
+        } catch(err) {
+
+        }
     }
 
 
@@ -402,14 +414,20 @@ const AddCandidate = (props) => {
                 {
                     isFileUpload ? 
                     <>
-                    {/* <input
+                    {
+                        missingColumn ?
+                        <p style={{color: "red"}}>{missingColumn}: is mandatory column and its missing</p> : null
+                    }
+                    <input
                         type="file"
                         accept=".csv, application/vnd.ms-excel"
                         onChange={(event) => {
                             fileReader = new FileReader()
                             fileReader.onloadend = handleFileRead
                             fileReader.readAsText(event.target.files[0])
-                            // setFileValue(event.target.files[0])
+                            if(!missingColumn) {
+                                setFileValue(event.target.files[0])
+                            }
                         }}
                         label="No of calls made"
                     />
@@ -417,7 +435,7 @@ const AddCandidate = (props) => {
                     onClick={() => {setIsFileUpload(false)}} 
                     style={{color: "blue", cursor: "pointer", textDecoration: "underline"}}>
                         Add Student
-                    </p>  */}
+                    </p> 
                     </>: <>
                     <Input
                     i={1}
@@ -456,11 +474,11 @@ const AddCandidate = (props) => {
                     onChange={setPercentage}
                     label="Percentage"
                     />
-                    {/* <p
+                    <p
                     onClick={() => {setIsFileUpload(true)}} 
                     style={{color: "blue", cursor: "pointer", textDecoration: "underline", width: "100%"}}>
                         Upload CSV File
-                    </p> */}
+                    </p>
                     </>
                 }
                     {

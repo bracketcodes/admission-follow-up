@@ -1,0 +1,105 @@
+.switches {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    display: flex;
+}
+
+.inputContainer {
+    height: auto;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 5rem;
+}
+
+.videoList {
+    height: 80%;
+    padding: 1rem;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 500px;
+    background: white;
+    overflow-y: scroll;
+}
+
+.table {
+    background: white;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    height: 80%;
+    position: relative;
+}
+
+.broadcast {
+    position: absolute;
+    height: 60px;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 2rem;
+    background-color: white;
+}
+
+.progressbar-block {
+    height: 400px;
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 5px
+}
+
+.progressbar-block > div {
+    height: 20px;
+    width: 70%;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.recepients {
+    margin-top: 60px;
+    overflow-y: scroll;
+}
+
+.videoList i {
+    cursor: pointer;
+}
+
+.videoList > div:hover {
+    box-shadow: 0 1px 10px 0 gray;
+    border-radius: 5px;
+}
+
+.inputContainer textarea {
+    height: 80px;
+    font-size: 1rem;
+}
+
+.inputContainer input {
+    width: 50%;
+    margin: auto;
+    margin-top: 1rem;
+    display: block;
+}
+
+.inputContainer label{
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: gray;
+    margin-bottom: 1rem;
+}
+
+.inputContainer input[type="file"] {
+    margin-top: 1rem;
+    width: 100%;
+}
+
