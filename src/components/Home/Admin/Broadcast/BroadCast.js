@@ -88,7 +88,6 @@ const BroadCast = (props) => {
                 setTotalSent(tempTotalSent)
                 if (res.status == 200) {
                     if(res.data.sent == true) {
-                        console.log(res.data)
                         tempSuccessfullySent += 1 
                         setSuccessfullySent(tempSuccessfullySent)
                     } 
@@ -115,27 +114,27 @@ const BroadCast = (props) => {
                     setMessage(event.target.value)
                 }}/>
                 {
-                    video ?
-                    <div 
-                    style={{color: "blue", marginTop: "1rem", textAlign: "left", position: "relative", height: "auto"}}>
-                        <p>video: </p> 
-                        <i
-                        onClick={() => {setVideo(null)}}
-                        style={{right: 0, position: "absolute", color: "red", cursor: "pointer"}} 
-                        className="fa fa-close"></i>
-                        <a
-                        style={{display: 'block'}} 
-                        href={video.link}>video link</a>
-                    </div>: 
-                <div
-                onClick={() => {SetIsSelectVideo(true)}} 
-                style={{textDecoration: "underline", color: "blue", marginTop: "1rem", textAlign: "left", cursor: "pointer"}}>
-                    Attach Video
-                </div>
+                    // video ?
+                    // <div 
+                    // style={{color: "blue", marginTop: "1rem", textAlign: "left", position: "relative", height: "auto"}}>
+                    //     <p>video: </p> 
+                    //     <i
+                    //     onClick={() => {setVideo(null)}}
+                    //     style={{right: 0, position: "absolute", color: "red", cursor: "pointer"}} 
+                    //     className="fa fa-close"></i>
+                    //     <a
+                    //     style={{display: 'block'}} 
+                    //     href={video.link}>video link</a>
+                    // </div>: 
+                // <div
+                // onClick={() => {SetIsSelectVideo(true)}} 
+                // style={{textDecoration: "underline", color: "blue", marginTop: "1rem", textAlign: "left", cursor: "pointer"}}>
+                //     Attach Video
+                // </div>
                 }
                 </div>
                 <button
-                disabled={!(message || video)}
+                disabled={!message}
                 className="button"
                 style={{background: "blue", color: "white"}} 
                 onClick={() => {setIsRecepients(true)}}>
@@ -190,7 +189,7 @@ const BroadCast = (props) => {
                         <button 
                         onClick={() => {onBroadCast()}}
                         disabled={!recepientList.length > 0}
-                        style={{margin: 0, marginRight: "2rem"}}
+                        style={{margin: 0, marginLeft: "2rem"}}
                         className="button">BroadCast</button>
                     </div>
                     <div className={styles['recepients']}>

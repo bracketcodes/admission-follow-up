@@ -63,6 +63,8 @@ main {
 .tool-bar {
   /* position: fixed;  */
   flex: 0.2;
+  /* padding: fixed; */
+  width: 15rem;
   height: 100%; 
   display: none;
   flex-direction: column;
