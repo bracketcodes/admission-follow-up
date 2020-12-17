@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom"
 import Dashboard from "../Dashboard/Dashboard"
 import Allocator from "./Allocator/Allocator"
 import Staffs from "./Staffs/Staffs"
+import AssetManager from "./AssetManager/AssetManager"
 import AddStaff from "./Staffs/AddStaff/AddStaff"
 import AddCandidate from "./Allocator/AddCandidate/AddCandidate"
 import CandidateList from "../../CandidateList/CandidateList"
@@ -11,6 +12,7 @@ import ConvertedCandidates from "../../ConvertedCandidates/ConvertedCandidates"
 import { getNavLinks, teacherNavLink } from "../../../service/SideBarService"
 import { withRouter } from "react-router-dom"
 import "../../../App.css"
+import BroadCast from "./Broadcast/BroadCast"
 
 const Admin = (props) => {
 
@@ -25,19 +27,16 @@ const Admin = (props) => {
 
     useEffect(() => {
         setLocation(getLocation())
-        if(localStorage.getItem("type").toLowerCase() === "admin") {
-            console.log("hello")
-            setNavLinks(getNavLinks())
-        } else {
-            setNavLinks(teacherNavLink())
-        }
-        // setNavLinks(getNavLinks())
+        // if(localStorage.getItem("type").toLowerCase() === "admin") {
+        //     setNavLinks(getNavLinks())
+        // } 
+        setNavLinks(getNavLinks())
         setIsAdmin(localStorage.getItem('type').toLowerCase() === "admin")
     }, [])
 
-    const renderFunction = (url) => {
+    // const renderFunction = (url) => {
 
-    }
+    // }
 
     return(
         <div style={{height: "100%", width: "100%", paddingTop: "3rem", display: "flex"}}>
@@ -46,6 +45,7 @@ const Admin = (props) => {
                     navLinks.map(el => {
                         return (
                             <div
+                            key={el.name}
                             onClick={() => {
                                 setCurrUrl(el.url)
                                 props.history.push(el.url)
@@ -63,60 +63,62 @@ const Admin = (props) => {
             <div className='main'>
             <Switch>
                 <Route path="/candidates/add" render={() => {
-                    // if(isAdmin) {
+                    if(isAdmin) {
                         return <AddCandidate/>
-                    // } else {
-                    //     return <Redirect to="/viewAllocatedCandidates"/>
-                    // }
+                    } else {
+                        return <Redirect to="/candidates"/>
+                    }
                 }}/>
                 <Route path="/candidates/update" render={() => {
-                    // if(isAdmin) {
+                    if(isAdmin) {
                         return <AddCandidate/>
-                    // }else {
-                    //     return <Redirect to="/viewAllocatedCandidates"/>
-                    // }
+                    }else {
+                        return <Redirect to="/candidates"/>
+                    }
                 }}/>
                 <Route path="/candidates" render={() => {
                     if(isAdmin) {
-                        return <Allocator/>
+                        return <CandidateList/>
                     } else {
-                        return <Redirect to="/viewAllocatedCandidates"/>
+                        return <Redirect to="/candidates"/>
                     }
                 }}/>
-                <Route path="/viewAllocatedCandidates" component={CandidateList}/>
                 <Route path="/convertedCandidates" render={() => {
                     if(isAdmin) {
                         return <ConvertedCandidates/>
                     } else {
-                        return <Redirect to="/viewAllocatedCandidates"/>
+                        return <Redirect to="/candidates"/>
                     }
                 }}/>
                 <Route path="/staffs/update" render={() => {
                     if(isAdmin) {
                         return <AddStaff/>
                     } else {
-                        return <Redirect to="/viewAllocatedCandidates"/>
+                        return <Redirect to="/candidates"/>
                     }
                 }}/>
                 <Route path="/staffs/add" render={() => {
                     if(isAdmin) {
                         return <AddStaff/>
                     } else {
-                        return <Redirect to="/viewAllocatedCandidates"/>
+                        return <Redirect to="/candidates"/>
                     }
                 }}/>
                 <Route path="/staffs" render={() => {
                     if(isAdmin) {
                         return <Staffs/>
                     } else {
-                        return <Redirect to="/viewAllocatedCandidates"/>
+                        return <Redirect to="/candidates"/>
                     }
                 }}/>
+                <Route path="/candidates" component={CandidateList}/>
+                <Route path="/assets" component={AssetManager}/>
+                <Route path="/whatsapp-broadcast" component={BroadCast}/>
                 <Route path={`/`} render={() => {
                     if(isAdmin) {
                         return <Dashboard/>
                     } else {
-                        return <Redirect to="/viewAllocatedCandidates"/>
+                        return <Redirect to="/candidates"/>
                     }
                 }}/>
             </Switch>

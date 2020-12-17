@@ -207,7 +207,7 @@ const AddStaff = (props) => {
                 "Name": name.value,
                 "Catagory": department.value,
                 "password": password.value,
-                "PhoneNumber": parseInt(phoneNumber.value)
+                "PhoneNumber": parseInt('91' + phoneNumber.value)
             })
             .then(res => {
                 if(res.status === 200) {
@@ -423,7 +423,7 @@ const AddStaff = (props) => {
                     onChange={setPassword}
                     label="Password"
                     />
-                    <Input
+                    {/* <Input
                     disabled={true}
                     // type="number"
                     i={5}
@@ -432,7 +432,7 @@ const AddStaff = (props) => {
                     setValue={getInitialValue}
                     onChange={(val) => {}}
                     label="No of Students Allocated"
-                    />
+                    /> */}
                     <div
                     style={{visibility: "hidden"}} 
                     className={styles["inputContainer"]}>

@@ -18,7 +18,6 @@ const Header = (props) => {
 
     useEffect(() => {
         if(localStorage.getItem("type").toLowerCase() === "admin") {
-            console.log("hello")
             setNavLink(getNavLinks())
         } else {
             setNavLink(teacherNavLink())

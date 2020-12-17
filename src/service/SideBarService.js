@@ -1,25 +1,19 @@
 export const getNavLinks = (logo) => {
-    return [{
+    let links = [{
         name: 'home',
         url: "/home",
         className: "fa fa-home"
     },
     {
-        name: 'Unallocated Candidates',
+        name: 'Candidates',
         url: "/candidates",
         className: "fa fa-hand-holding-water"
 
     },
     {
-        name: 'Allocated Candidates',
-        url: "/viewAllocatedCandidates",
-        className: "fa fa-check-circle"
-
-    },
-    {
         name: 'converted Candidates',
         url: "/convertedCandidates",
-        className: "fa fa-check-double"
+        className: "fa fa-check-circle"
 
     },
     {
@@ -28,6 +22,20 @@ export const getNavLinks = (logo) => {
         className: "fa fa-user-tie"
 
     }]
+
+    if (localStorage.getItem("type") === "admin") {
+        links.push({
+            name: 'assets',
+            url: '/assets',
+            className: 'fa fa-file-image'
+        })
+        links.push({
+            name: 'whatsapp-broadcast',
+            url: '/whatsapp-broadcast',
+            className: 'fa fa-bullhorn'
+        })
+    }
+    return links
 }
 
 export const teacherNavLink = () => {

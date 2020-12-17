@@ -46,9 +46,6 @@ const Login = (props) => {
                 <h2>
                     Login
                 </h2>
-                <h2>
-                    Good Morning
-                </h2>
                 <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
                     {isInvalidLogin ?
                     <p>

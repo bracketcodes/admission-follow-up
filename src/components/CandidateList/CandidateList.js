@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react"
 import MUIDataTable from "mui-datatables"
 import styles from "./CandidateList.module.css"
 import Call from "../../ui/Call/Call"
-import { getCandidateList } from "../../service/CandidateService"
+import { getUnAllocatedCandidates } from "../../service/CandidateService"
+import {withRouter} from "react-router-dom"
 import Title from "../../ui/Title/Title"
 import { Details } from "@material-ui/icons"
 
@@ -15,7 +16,7 @@ const CandidateList = (props) => {
     const [data, setData] = useState([])
     
     useEffect(() =>{
-        getCandidateList()
+        getUnAllocatedCandidates()
         .then(res => {
             if(res.status === 200) {
                 setData(res.data)
@@ -51,17 +52,6 @@ const CandidateList = (props) => {
          }
         },
         {
-            name: "details",
-            label: "Current Teacher",
-            options: {
-             filter: true,
-             sort: false,
-             customBodyRender: (value) => {
-             return <p>{value[0].Name}</p>
-             }
-            }
-           },
-        {
             name: "percentage",
             label: "Percentage",
             options: {
@@ -94,7 +84,7 @@ const CandidateList = (props) => {
            }
        ];
 
-    if(localStorage.getItem("type").toLowerCase() === "teacher") {
+    if(true) {
         columns.push({
             name: "Action",
             label: "Call",
@@ -151,7 +141,7 @@ const CandidateList = (props) => {
              <Title
              hideButton={localStorage.getItem("type") !== "admin"}
             onClick={onAddStudent} 
-            title="Allocated Candidates" />
+            title="Candidates" />
             {
                 isCall ?
                 <Call
@@ -172,4 +162,4 @@ const CandidateList = (props) => {
             )
 }
 
-export default CandidateList
+export default withRouter(CandidateList)

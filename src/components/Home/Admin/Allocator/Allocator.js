@@ -125,7 +125,7 @@ const Allocator = (props) => {
             color={selectedRows.length ? "blue" : "red"}
             onClick={selectedRows.length ? onSetIsView : onAddStudent} 
             buttonName={selectedRows.length ? "Allocate to" : "Add candidate"}
-            title="Select candidates to allocate" />
+            title="Candidates" />
             {
                 isView ? 
                 <div className="backdrop">

@@ -40,7 +40,7 @@ const Dashboard = (props) => {
         getUnAllocatedCandidates()
         .then(res => {
             if (res.status === 200) {
-                setUnAllocatedStudentsCount(res.data.length)
+                setAllocatedStudentsCount(allocatedStudentsCount + res.data.length)
             }
         })
         .catch(err => {
@@ -71,8 +71,8 @@ const Dashboard = (props) => {
 
     let blocks = [
         {title: "students", color: "#61dafb", className: "fa fa-user-graduate", count: allocatedStudentsCount + unAllocatedStudentsCount},
-        {title: "allocated students", color: "#fbcc61", className: "fa fa-check-circle", count: allocatedStudentsCount},
-        {title: "unallocated students", color: "red", className: 'fas fa-hand-holding-water', count: unAllocatedStudentsCount},
+        // {title: "allocated students", color: "#fbcc61", className: "fa fa-check-circle", count: allocatedStudentsCount},
+        // {title: "unallocated students", color: "red", className: 'fas fa-hand-holding-water', count: unAllocatedStudentsCount},
         {title: "Staffs", color: "orange", className: 'fa fa-user-tie', count: staffCount},
         {title: "Converted Students", color: "green", className:"fa fa-check-circle", count: convertedCount},
         {title: "Interested Count", color: "blue", className:"fa fa-thumbs-up", count: interestedCount}
