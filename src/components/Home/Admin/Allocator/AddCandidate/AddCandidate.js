@@ -4,7 +4,7 @@ import Title from "../../../../../ui/Title/Title"
 import Input from "../../../../../ui/Input/Input"
 import { withRouter } from "react-router-dom"
 import MUIDataTable from "mui-datatables"
-import { getCandidateList, addCandidate } from "../../../../../service/CandidateService"
+import { getCandidateList, addCandidate, uploadCandidate } from "../../../../../service/CandidateService"
 import Alert from "../../../../../ui/Alert/Alert"
 
 
@@ -200,7 +200,20 @@ const AddCandidate = (props) => {
 
     const onAddTeacher = () => {
         if(isFileUpload) {
-            console.log(fileValue)
+            let data = new FormData()
+            data.append('data', fileValue)
+            uploadCandidate(data)
+            .then(res => {
+                if(res.status === 200) {
+                    clearFields()
+                    setOnAddSuccess(true)
+                    setIsInitiated(false)
+                }
+            })
+            .catch(err => {
+                setIsInitiated(false)
+                setOnAddFailure(true)
+            })
         } else {
             let isValid = validateForm()
             
@@ -236,6 +249,7 @@ const AddCandidate = (props) => {
             for (let column of ['name', 'phone number', 'percentage', 'department']) {
                 if(columns.indexOf(column) === -1) {
                     setMissingColumn(column)
+                    setFileValue('')
                     throw Error
                 }
             } 

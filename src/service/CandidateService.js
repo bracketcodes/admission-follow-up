@@ -33,12 +33,15 @@ export const addCandidate = (student) => {
     return axios.post(`${BASE_URL}/student/add`, student)
 }
 
+export const uploadCandidate = (student) => {
+    return axios.post(`${BASE_URL}/student/add_csv`, student, {'Content-Type': 'multipart/form-data' })
+}
+
 export const getUnAllocatedCandidates = () => {
     return axios.get(`${BASE_URL}/student/list/0`)
 }
 
 export const updateStudentInfo = (studentId, data) => {
-    console.log(data)
     return axios.post(`${BASE_URL}/student/updateInfo/${studentId}`, data)
 }
 
