@@ -247,21 +247,8 @@ const AddCandidate = (props) => {
 
     const handleFileRead = (e) => {
         const content = fileReader.result
-        console.log(content)
         try {
-<<<<<<< HEAD
-            let columns = String(content).split(/\r\n|\n/)[0].toLowerCase()
-            for (let column of ['name', 'phone number', 'percentage', 'department']) {
-                if(columns.indexOf(column) === -1) {
-                    setMissingColumn(column)
-                    setFileValue('')
-                    throw Error
-                }
-            } 
-            setMissingColumn('')
-        } catch(err) {
-=======
-            let columns = String(content).split(/\r\n|\n/)[0].toLowerCase().trim()
+            let columns = String(content).split(/\r\n|\n/)[0].trim()
             // for (let column of ['name', 'phone number', 'percentage', 'department']) {
             //     if(columns.indexOf(column) === -1) {
             //         setMissingColumn(column)
@@ -270,11 +257,12 @@ const AddCandidate = (props) => {
             // } 
             // setOnAddFailure(true)
             // setOnAddSuccess(false)
-            if(columns.includes('phone number') === false) {
-                setMissingColumn('phone number')
+            console.log(columns)
+            if(columns.includes('PhoneNumber') === false) {
+                setMissingColumn('PhoneNumber')
                 throw Error
             }
->>>>>>> 163e4253beb79d923c823118f7144407184143bb
+            setMissingColumn('')
 
         } catch(err) {
             
@@ -456,26 +444,19 @@ const AddCandidate = (props) => {
                     }
                     <input
                         type="file"
-                        accept=".csv, application/vnd.ms-excel"
+                        accept=".csv"
                         onChange={(event) => {
                             fileReader = new FileReader()
                             fileReader.onloadend = handleFileRead
-<<<<<<< HEAD
-                            if(event.target.files) {
-                                fileReader.readAsText(event.target.files[0])
-                                if(!missingColumn) {
-                                    setFileValue(event.target.files[0])
-
-                                }
-                            } else {
-                                setFileValue('')
-=======
                             if(event.target.files.length > 0) {
                                 fileReader.readAsText(event.target.files[0])
                                 if(!missingColumn) {
                                     setFileValue(event.target.files[0])
+                                } else {
+                                    setFileValue('')
                                 }
->>>>>>> 163e4253beb79d923c823118f7144407184143bb
+                            } else {
+                                setFileValue('')
                             }
                         }}
                         label="No of calls made"
