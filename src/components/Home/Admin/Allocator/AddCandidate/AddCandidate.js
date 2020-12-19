@@ -438,9 +438,14 @@ const AddCandidate = (props) => {
                         onChange={(event) => {
                             fileReader = new FileReader()
                             fileReader.onloadend = handleFileRead
-                            fileReader.readAsText(event.target.files[0])
-                            if(!missingColumn) {
-                                setFileValue(event.target.files[0])
+                            if(event.target.files) {
+                                fileReader.readAsText(event.target.files[0])
+                                if(!missingColumn) {
+                                    setFileValue(event.target.files[0])
+
+                                }
+                            } else {
+                                setFileValue('')
                             }
                         }}
                         label="No of calls made"
