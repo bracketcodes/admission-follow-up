@@ -83,8 +83,9 @@ const CandidateList = (props) => {
             }
            }
        ];
-
-    if(true) {
+    
+    // make this true enable call option
+    if(false) {
         columns.push({
             name: "Action",
             label: "Call",
@@ -152,7 +153,7 @@ const CandidateList = (props) => {
             }
                 <div className={styles['table']}>
                     <MUIDataTable
-                    title={"Allocated Candidates"}
+                    title={"Candidate List"}
                     data={data}
                     columns={columns}
                     options={options}

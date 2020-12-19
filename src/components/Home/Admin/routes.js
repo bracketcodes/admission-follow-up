@@ -39,7 +39,7 @@ const Admin = (props) => {
     // }
 
     return(
-        <div style={{height: "100%", width: "100%", paddingTop: "3rem", display: "flex"}}>
+        <div style={{height: "100%", width: "100%", paddingTop: "3rem", display: "flex", position: "fixed"}}>
             <div className='tool-bar'>
                 {
                     navLinks.map(el => {
@@ -83,7 +83,7 @@ const Admin = (props) => {
                         return <Redirect to="/candidates"/>
                     }
                 }}/>
-                <Route path="/convertedCandidates" render={() => {
+                {/* <Route path="/convertedCandidates" render={() => {
                     if(isAdmin) {
                         return <ConvertedCandidates/>
                     } else {
@@ -110,9 +110,9 @@ const Admin = (props) => {
                     } else {
                         return <Redirect to="/candidates"/>
                     }
-                }}/>
+                }}/> */}
                 <Route path="/candidates" component={CandidateList}/>
-                <Route path="/assets" component={AssetManager}/>
+                {/* <Route path="/assets" component={AssetManager}/> */}
                 <Route path="/whatsapp-broadcast" component={BroadCast}/>
                 <Route path={`/`} render={() => {
                     if(isAdmin) {

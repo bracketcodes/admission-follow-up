@@ -55,13 +55,15 @@ export const validate = (value, i) => {
         return parseInt(value) <= 100 || value.length === 0
     }
 
-    if(i !== 3) {
-        return value.length > 0
-    }
+    // if(i !== 3) {
+    //     return value.length > 0
+    // }
 
     if(i === 3) {
         return value.length == 10
     }
+
+    return true
 }
 
 const AddCandidate = (props) => {
@@ -98,8 +100,8 @@ const AddCandidate = (props) => {
     }, [])
 
     
-    const [name, setName] = useState(getInitialValue(props.location.state ? props.location.state.Name : ""))
-    const [department, setDepartment] = useState(getInitialValue(props.location.state ? String(props.location.state.Catagory).toUpperCase(): ""))
+    const [name, setName] = useState(getInitialValue(props.location.state ? props.location.state.Name : "", true))
+    const [department, setDepartment] = useState(getInitialValue(props.location.state ? String(props.location.state.Catagory).toUpperCase(): "", true))
     const [phoneNumber, setPhoneNumber] = useState(getInitialValue(props.location.state ? props.location.state.PhoneNumber : ""))
     const [percentage, setPercentage] = useState(getInitialValue(props.location.state ? props.location.state.percentage : "", true))
     const [isViewAllocated, setIsViewAllocated] = useState(false)
@@ -189,13 +191,14 @@ const AddCandidate = (props) => {
     }
 
     const validateForm = () => {
-        let partialValidation = name.isValid && phoneNumber.isValid && department.isValid
+        // let partialValidation = name.isValid && phoneNumber.isValid && department.isValid
 
-        if (percentage.value.length > 0) {
-            partialValidation = partialValidation && percentage.isValid
-        }
+        // if (percentage.value.length > 0) {
+        //     partialValidation = partialValidation && percentage.isValid
+        // }
+        return phoneNumber.isValid
 
-        return partialValidation
+        // return partialValidation
      }
 
     const onAddTeacher = () => {
@@ -221,7 +224,7 @@ const AddCandidate = (props) => {
                 setIsInitiated(true)
                 addCandidate({
                     "Name": name.value,
-                    "PhoneNumber": parseInt('91' + phoneNumber.value),
+                    "PhoneNumber": parseInt(phoneNumber.value),
                     "Catagory": department.value,
                     "percentage": percentage.value
                 })
@@ -244,7 +247,9 @@ const AddCandidate = (props) => {
 
     const handleFileRead = (e) => {
         const content = fileReader.result
+        console.log(content)
         try {
+<<<<<<< HEAD
             let columns = String(content).split(/\r\n|\n/)[0].toLowerCase()
             for (let column of ['name', 'phone number', 'percentage', 'department']) {
                 if(columns.indexOf(column) === -1) {
@@ -255,7 +260,24 @@ const AddCandidate = (props) => {
             } 
             setMissingColumn('')
         } catch(err) {
+=======
+            let columns = String(content).split(/\r\n|\n/)[0].toLowerCase().trim()
+            // for (let column of ['name', 'phone number', 'percentage', 'department']) {
+            //     if(columns.indexOf(column) === -1) {
+            //         setMissingColumn(column)
+            //         throw Error
+            //     }
+            // } 
+            // setOnAddFailure(true)
+            // setOnAddSuccess(false)
+            if(columns.includes('phone number') === false) {
+                setMissingColumn('phone number')
+                throw Error
+            }
+>>>>>>> 163e4253beb79d923c823118f7144407184143bb
 
+        } catch(err) {
+            
         }
     }
 
@@ -438,6 +460,7 @@ const AddCandidate = (props) => {
                         onChange={(event) => {
                             fileReader = new FileReader()
                             fileReader.onloadend = handleFileRead
+<<<<<<< HEAD
                             if(event.target.files) {
                                 fileReader.readAsText(event.target.files[0])
                                 if(!missingColumn) {
@@ -446,6 +469,13 @@ const AddCandidate = (props) => {
                                 }
                             } else {
                                 setFileValue('')
+=======
+                            if(event.target.files.length > 0) {
+                                fileReader.readAsText(event.target.files[0])
+                                if(!missingColumn) {
+                                    setFileValue(event.target.files[0])
+                                }
+>>>>>>> 163e4253beb79d923c823118f7144407184143bb
                             }
                         }}
                         label="No of calls made"
@@ -453,7 +483,7 @@ const AddCandidate = (props) => {
                     <p
                     onClick={() => {setIsFileUpload(false)}} 
                     style={{color: "blue", cursor: "pointer", textDecoration: "underline"}}>
-                        Add Student
+                        Add Candidate Via Form
                     </p> 
                     </>: <>
                     <Input
@@ -501,52 +531,52 @@ const AddCandidate = (props) => {
                     </>
                 }
                     {
-                        isUpdate ?
-                        <>
-                        <Input
-                        type="text"
-                        disabled={true}
-                        value={{value: noOfCalls}}
-                        onChange={(val) => {}}
-                        label="No of calls made"
-                        />
-                        <div  
-                        onClick={() => {setIsViewCallHistory(true)}}
-                        style={{marginTop: "1rem", color: "blue", fontWeight: "block", cursor: "pointer"}}
-                        className={styles["inputContainer"]}>
-                            View Call history
-                        </div>
-                        <div  
-                        style={{marginTop: "1rem", color: "blue", fontWeight: "block", cursor: "pointer", visibility: "hidden"}}
-                        className={styles["inputContainer"]}>
-                            {!isViewAllocated ?  "View Allocated candidates" : "Hide Allocated candidates"}
-                        </div>
-                        </> : null
+                        // isUpdate ?
+                        // <>
+                        // <Input
+                        // type="text"
+                        // disabled={true}
+                        // value={{value: noOfCalls}}
+                        // onChange={(val) => {}}
+                        // label="No of calls made"
+                        // />
+                        // <div  
+                        // onClick={() => {setIsViewCallHistory(true)}}
+                        // style={{marginTop: "1rem", color: "blue", fontWeight: "block", cursor: "pointer"}}
+                        // className={styles["inputContainer"]}>
+                        //     View Call history
+                        // </div>
+                        // <div  
+                        // style={{marginTop: "1rem", color: "blue", fontWeight: "block", cursor: "pointer", visibility: "hidden"}}
+                        // className={styles["inputContainer"]}>
+                        //     {!isViewAllocated ?  "View Allocated candidates" : "Hide Allocated candidates"}
+                        // </div>
+                        // </> : null
                     }
                     
                     {
-                            isUpdate && isViewAllocated && allocatedCandidates.length? 
-                            <div className={styles['allocated']}>
-                                <MUIDataTable
-                                title={name.value + "  follows"}
-                                data={allocatedCandidates}
-                                columns={columns}
-                                options={{selectableRows: false}}/>
-                            </div> : null
+                            // isUpdate && isViewAllocated && allocatedCandidates.length? 
+                            // <div className={styles['allocated']}>
+                            //     <MUIDataTable
+                            //     title={name.value + "  follows"}
+                            //     data={allocatedCandidates}
+                            //     columns={columns}
+                            //     options={{selectableRows: false}}/>
+                            // </div> : null
                         }
                         {
-                            allocatedCandidates.length? 
-                            <div className={styles['allocated']}>
-                                <MUIDataTable
-                                title={"Candidates to be allocated"}
-                                data={allocatedCandidates}
-                                columns={columns}
-                                options={{selectableRows: false}}/>
-                            </div> : null
+                            // allocatedCandidates.length? 
+                            // <div className={styles['allocated']}>
+                            //     <MUIDataTable
+                            //     title={"Candidates to be allocated"}
+                            //     data={allocatedCandidates}
+                            //     columns={columns}
+                            //     options={{selectableRows: false}}/>
+                            // </div> : null
                         }
                     <div style={{width: "100%"}}>
                         <button
-                        disabled={isInitiated}
+                        disabled={isInitiated || (isFileUpload && missingColumn.length > 0) || (isFileUpload && !fileValue)}
                         className="button"
                         style={{color: "white", visibility: isUpdate ? "hidden" : ""}} 
                         onClick={() => {onAddTeacher()}}>
