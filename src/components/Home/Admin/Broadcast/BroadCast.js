@@ -81,7 +81,7 @@ const BroadCast = (props) => {
             console.log('91' + recepient)
             data.append('phone', '91' + recepient)
             data.append('body', String(message).trim() + ' ' + `${video ? String(video.link).trim() : ''}`)
-            axios.post("https://eu109.chat-api.com/instance206702/sendMessage?token=tkxwyjhlif5e8iok",
+            axios.post(" https://eu9.chat-api.com/instance208226/sendMessage?token=6uvnkupudrv25ueu",
             data=data).
             then(res => {
                 tempTotalSent +=1 
