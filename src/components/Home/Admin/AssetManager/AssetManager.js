@@ -23,7 +23,7 @@ const AssetManager = (props) => {
         if(fileValue) {
             data.append('data', fileValue)
             data.append('description', description ?  description : '')
-            axios.post('http://localhost:3000/api/media/videoUpload', data=data)
+            axios.post('http://nandha.net.in:3000/api/media/videoUpload', data=data)
             .then(res => {
                 if(res.status == 200) {
                     console.log('file uploaded successfully')
