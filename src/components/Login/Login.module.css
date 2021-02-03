@@ -6,13 +6,13 @@
 
 .logo-container {
     display: none;
-    background-color: lightgray;
+    background-color: #283334;
     align-items: center;
     justify-content: center;
 }
 
 .login-container img {
-    height: 30px;
+    height: 190px;
 }
 
 .login {
@@ -43,7 +43,7 @@
     font-size: 1rem;
     border: none;
     width: 320px;
-    border-bottom: 1px solid blue;
+    border-bottom: 1px solid #bc7f0e;
 }
 
 .login h2:first-of-type {
@@ -51,10 +51,10 @@
     display: inline-block;
     font-weight: 400;
     font-size: 1.1rem;
-    color: blue;
+    color: #bc7f0e;
     padding: 0.5rem;
     min-width: 100px;
-    border-bottom: 1px solid blue;
+    border-bottom: 1px solid #bc7f0e;
 
 }
 
@@ -74,7 +74,7 @@
     width: auto;
     min-width: 80px;
     border: none;
-    background-color: blue;
+    background-color: #bc7f0e !important;
     border-radius: 5px;
     text-transform: uppercase;
     font-weight: 400px;
@@ -89,7 +89,7 @@
 
 .login input:focus {
     outline: none;
-    border-bottom: 2px solid blue;
+    border-bottom: 2px solid #bc7f0e;
 }
 
 

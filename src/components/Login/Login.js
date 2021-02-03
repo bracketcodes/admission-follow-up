@@ -38,7 +38,7 @@ const Login = (props) => {
         <div className={styles['login-container']}>
             <div className={styles['logo-container']}>
                 <img
-                src={require('../../assets/bracketcodes.svg')}
+                src={require('../../assets/nandha.png')}
                 alt='logo'
                 />
             </div>
