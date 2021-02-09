@@ -297,7 +297,7 @@ const BroadCast = (props) => {
                 </div> : null
             }
         </div>: 
-        qrCode['accountStatus'] == 'got qr code' ?
+        qrCode['accountStatus'] != 'authenticated' ?
         <div style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
             <img
             style={{height: "300px", width: "300px"}} 
