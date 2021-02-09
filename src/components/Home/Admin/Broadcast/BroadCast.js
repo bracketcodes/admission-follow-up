@@ -13,6 +13,11 @@ export const options = {
     selectableRows: false,
 };
 
+function useForceUpdate(){
+    const [value, setValue] = useState(0); // integer state
+    return () => setValue(value => value + 1); // update the state to force render
+}
+
 
 const BroadCast = (props) => {
     const columns = [
@@ -42,9 +47,12 @@ const BroadCast = (props) => {
         }
        ];
     
+    const forceUpdate = useForceUpdate()
     const [video, setVideo] = useState()
+    const [isGenerate, setIsGenerate] = useState(false)
     const [message, setMessage] = useState()
     const [videoList, setVideoList] = useState([])
+    const [qrCode, setQrCode] = useState({})
     const [data, setData] = useState([])
     const [isRecepients, setIsRecepients] = useState(false)
     const [recepientList, setRecepientList] = useState([])
@@ -53,6 +61,9 @@ const BroadCast = (props) => {
     const [isBroadCasting, setIsBroadcasting] = useState(false)
     const [successfullySent, setSuccessfullySent] = useState(0)
     const [unSuccessfull, setUnSuccessfull] = useState(0)
+    let [timer, setTimer] = useState(40)
+    let [int, setInt] = useState()
+ 
 
     useEffect(() => {
         if(data.length == 0) {
@@ -69,19 +80,46 @@ const BroadCast = (props) => {
         if(videoList.length == 0) {
             setVideoList([{link:'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', fileName: 'filenmae'}])
         }
+        
+        if(qrCode['accountStatus'] === undefined) {
+            startQrCode()
+        }
     }, [])
+
+
+    const startQrCode = async () => {
+        await getQrCode()
+        setTimer(40)
+        clearInterval(int)
+        setInt(setInterval(() => {setTimer(timer => timer -1)}, 1000))
+    }
+
+    if (timer == 0) {
+        clearInterval(int)
+    }
+
+    const getQrCode = () => {
+        axios.get("https://eu9.chat-api.com/instance159432/status?token=qqvxy98bhlo9j0n4")
+        .then(res => {
+            if(res.status == 200) {
+                setQrCode(res.data)
+            } else {
+            }
+        })
+    }
     
     const onBroadCast = () => {
         setIsRecepients(false)
         setIsBroadcasting(true)
         let tempTotalSent = 0
         let tempSuccessfullySent = 0
+        console.log(recepientList)
         for (let recepient of recepientList) {
             let data = new FormData()
             console.log('91' + recepient)
             data.append('phone', '91' + recepient)
             data.append('body', String(message).trim() + ' ' + `${video ? String(video.link).trim() : ''}`)
-            axios.post(" https://eu9.chat-api.com/instance208226/sendMessage?token=6uvnkupudrv25ueu",
+            axios.post("https://eu9.chat-api.com/instance159432/sendMessage?token=qqvxy98bhlo9j0n4",
             data=data).
             then(res => {
                 tempTotalSent +=1 
@@ -102,7 +140,21 @@ const BroadCast = (props) => {
         // setRecepientList([])
     }
 
+    const logout = () => {
+        axios.get("https://eu9.chat-api.com/instance159432/logout?token=qqvxy98bhlo9j0n4")
+        .then(res => {
+            if(res.status == 200) {
+                startQrCode()
+            } else {
+            }
+        })
+
+    }
+
     return (
+        <>
+        {
+        qrCode['accountStatus'] == "authenticated" ? 
         <div className={styles["broadcast-block"]}>
             <div className={styles['inputContainer']}>
                 <div style={{width: "50%", margin: "auto", height: "auto"}}>
@@ -140,6 +192,11 @@ const BroadCast = (props) => {
                 onClick={() => {setIsRecepients(true)}}>
                 {props.buttonName ? props.buttonName : "Select Recepients"}
                 </button>
+                <p
+                onClick={logout} 
+                style={{color: "red", cursor: "pointer"}}>
+                    Disconnect Whatsapp
+                </p>
             </div>
             {
                 isSelectVideo ? 
@@ -201,7 +258,7 @@ const BroadCast = (props) => {
                             {
                                 onRowSelectionChange: (a, b) => {
                                     let tempList = b.map(el => {
-                                        return data[el.index]['PhoneNumber']
+                                        return data[el.dataIndex]['PhoneNumber']
                                     })
                                     setRecepientList(tempList)
                                 }
@@ -239,7 +296,25 @@ const BroadCast = (props) => {
                 </div>
                 </div> : null
             }
-        </div>
+        </div>: 
+        qrCode['accountStatus'] == 'got qr code' ?
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
+            <img
+            style={{height: "300px", width: "300px"}} 
+            src={timer == 0 ? require("../../../../assets/reload.png") :  qrCode['qrCode']}/>
+            <div>{timer == 0 ? 
+            <p
+            style={{color: "blue", cursor: "pointer"}} 
+            onClick={startQrCode}>Reload QR code</p> : timer}</div>
+        <button
+            className="button"
+            style={{background: "blue", color: "white"}} 
+            onClick={() => {startQrCode()}}>
+            Authenticate
+        </button>
+    </div> : null
+        }
+        </>
     )
 }
 
