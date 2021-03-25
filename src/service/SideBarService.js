@@ -30,14 +30,14 @@ export const getNavLinks = (logo) => {
     }
 ]
 
-    // if (localStorage.getItem("type") === "admin") {
-        // links.push({
-        //     name: 'assets',
-        //     url: '/assets',
-        //     className: 'fa fa-file-image'
-        // })
-        // links.push()
-    // }
+    if (localStorage.getItem("type") === "admin") {
+        links.push({
+            name: 'assets',
+            url: '/assets',
+            className: 'fa fa-file-image'
+        })
+        links.push()
+    }
     return links
 }
 

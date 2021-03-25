@@ -29,7 +29,7 @@ const Admin = (props) => {
         setLocation(getLocation())
         // if(localStorage.getItem("type").toLowerCase() === "admin") {
         //     setNavLinks(getNavLinks())
-        // } 
+        // }
         setNavLinks(getNavLinks())
         setIsAdmin(localStorage.getItem('type').toLowerCase() === "admin")
     }, [])
@@ -49,7 +49,7 @@ const Admin = (props) => {
                             onClick={() => {
                                 setCurrUrl(el.url)
                                 props.history.push(el.url)
-                            }} 
+                            }}
                             style={{display: "flex", width: "90%", borderRadius: "10px", padding: "1rem", justifyContent: "center", alignItems: "center", cursor: "pointer", background: el.url === currUrl ? "darkgray" : null, color: el.url === currUrl ? "lightblue" : null}}>
                                 <i style={{flex: 0.3, color: el.url === currUrl ? "lightblue" : null}} className={el.className}/>
                                 <div style={{flex: 0.7, textAlign: "left", fontSize: "0.9rem", fontFamily: 'Roboto', textTransform: "capitalize", fontWeight: "bold"}}>
@@ -112,7 +112,7 @@ const Admin = (props) => {
                     }
                 }}/> */}
                 <Route path="/candidates" component={CandidateList}/>
-                {/* <Route path="/assets" component={AssetManager}/> */}
+                <Route path="/assets" component={AssetManager}/>
                 <Route path="/whatsapp-broadcast" component={BroadCast}/>
                 <Route path={`/`} render={() => {
                     if(isAdmin) {

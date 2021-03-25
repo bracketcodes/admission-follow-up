@@ -46,7 +46,7 @@ const BroadCast = (props) => {
             }
         }
        ];
-    
+
     const forceUpdate = useForceUpdate()
     const [video, setVideo] = useState()
     const [isGenerate, setIsGenerate] = useState(false)
@@ -63,7 +63,7 @@ const BroadCast = (props) => {
     const [unSuccessfull, setUnSuccessfull] = useState(0)
     let [timer, setTimer] = useState(40)
     let [int, setInt] = useState()
- 
+
 
     useEffect(() => {
         if(data.length == 0) {
@@ -80,7 +80,7 @@ const BroadCast = (props) => {
         if(videoList.length == 0) {
             setVideoList([{link:'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', fileName: 'filenmae'}])
         }
-        
+
         if(qrCode['accountStatus'] === undefined) {
             startQrCode()
         }
@@ -107,7 +107,7 @@ const BroadCast = (props) => {
             }
         })
     }
-    
+
     const onBroadCast = () => {
         setIsRecepients(false)
         setIsBroadcasting(true)
@@ -122,20 +122,20 @@ const BroadCast = (props) => {
             axios.post("https://eu9.chat-api.com/instance159432/sendMessage?token=qqvxy98bhlo9j0n4",
             data=data).
             then(res => {
-                tempTotalSent +=1 
+                tempTotalSent +=1
                 setTotalSent(tempTotalSent)
                 if (res.status == 200) {
                     if(res.data.sent == true) {
-                        tempSuccessfullySent += 1 
+                        tempSuccessfullySent += 1
                         setSuccessfullySent(tempSuccessfullySent)
-                    } 
-                } 
+                    }
+                }
             })
             .catch(err => {
-                tempTotalSent +=1 
+                tempTotalSent +=1
                 setTotalSent(tempTotalSent)
             })
-            
+
         }
         // setRecepientList([])
     }
@@ -154,68 +154,68 @@ const BroadCast = (props) => {
     return (
         <>
         {
-        qrCode['accountStatus'] == "authenticated" ? 
+        qrCode['accountStatus'] == "authenticated" ?
         <div className={styles["broadcast-block"]}>
             <div className={styles['inputContainer']}>
                 <div style={{width: "50%", margin: "auto", height: "auto"}}>
                 <label>Message*</label>
                 <textarea
                 placeholder="Message"
-                style={{marginTop: 0}} 
+                style={{marginTop: 0}}
                 onChange={(event) => {
                     setMessage(event.target.value)
                 }}/>
                 {
-                    // video ?
-                    // <div 
-                    // style={{color: "blue", marginTop: "1rem", textAlign: "left", position: "relative", height: "auto"}}>
-                    //     <p>video: </p> 
-                    //     <i
-                    //     onClick={() => {setVideo(null)}}
-                    //     style={{right: 0, position: "absolute", color: "red", cursor: "pointer"}} 
-                    //     className="fa fa-close"></i>
-                    //     <a
-                    //     style={{display: 'block'}} 
-                    //     href={video.link}>video link</a>
-                    // </div>: 
-                // <div
-                // onClick={() => {SetIsSelectVideo(true)}} 
-                // style={{textDecoration: "underline", color: "blue", marginTop: "1rem", textAlign: "left", cursor: "pointer"}}>
-                //     Attach Video
-                // </div>
+                    video ?
+                    <div
+                    style={{color: "blue", marginTop: "1rem", textAlign: "left", position: "relative", height: "auto"}}>
+                        <p>video: </p>
+                        <i
+                        onClick={() => {setVideo(null)}}
+                        style={{right: 0, position: "absolute", color: "red", cursor: "pointer"}}
+                        className="fa fa-close"></i>
+                        <a
+                        style={{display: 'block'}}
+                        href={video.link}>video link</a>
+                    </div>:
+                <div
+                onClick={() => {SetIsSelectVideo(true)}}
+                style={{textDecoration: "underline", color: "blue", marginTop: "1rem", textAlign: "left", cursor: "pointer"}}>
+                    Attach Video
+                </div>
                 }
                 </div>
                 <button
                 disabled={!message}
                 className="button"
-                style={{background: "blue", color: "white"}} 
+                style={{background: "blue", color: "white"}}
                 onClick={() => {setIsRecepients(true)}}>
                 {props.buttonName ? props.buttonName : "Select Recepients"}
                 </button>
                 <p
-                onClick={logout} 
+                onClick={logout}
                 style={{color: "red", cursor: "pointer"}}>
                     Disconnect Whatsapp
                 </p>
             </div>
             {
-                isSelectVideo ? 
+                isSelectVideo ?
                 <div className="backdrop">
                     <div
-                    style={{position: "relative"}} 
+                    style={{position: "relative"}}
                     className={styles['videoList']}>
                         <i
                         onClick={() => {SetIsSelectVideo(false)}}
-                        style={{position: "absolute", fontSize: "1rem", top: 1, right: 1}} 
+                        style={{position: "absolute", fontSize: "1rem", top: 1, right: 1}}
                         className="fa fa-close"/>
                         {
-                            videoList.length ? 
+                            videoList.length ?
                             videoList.map(el => {
                                 return (
                                 <div
                                 key={el.fileName}
-                                onClick={() => {setVideo(el); SetIsSelectVideo(false)}} 
-                                style={{width: "100%", height: "7rem", display: "flex", cursor: "pointer", 
+                                onClick={() => {setVideo(el); SetIsSelectVideo(false)}}
+                                style={{width: "100%", height: "7rem", display: "flex", cursor: "pointer",
                                 marginTop: "1rem"}}>
                                     <div style={{flex: 0.5}}>
                                         <video style={{height: "100%", width: "100%"}} controls>
@@ -236,14 +236,14 @@ const BroadCast = (props) => {
                 isRecepients ?
                 <div className="backdrop">
                 <div
-                style={{position: "relative"}} 
+                style={{position: "relative"}}
                 className={styles['table']}>
                     <div className={styles['broadcast']}>
                     <i
                     onClick={() => {setIsRecepients(false)}}
-                    style={{position: "absolute", fontSize: "1rem", top: 1, right: 1, cursor: "pointer"}} 
+                    style={{position: "absolute", fontSize: "1rem", top: 1, right: 1, cursor: "pointer"}}
                     className="fa fa-close"/>
-                        <button 
+                        <button
                         onClick={() => {onBroadCast()}}
                         disabled={!recepientList.length > 0}
                         style={{margin: 0, marginLeft: "2rem"}}
@@ -272,16 +272,16 @@ const BroadCast = (props) => {
             {
                 isBroadCasting ?
                 <div className="backdrop">
-                <div 
+                <div
                 className={styles['progressbar-block']}>
                     <p><i className="fa fa-bullhorn"/> BroadCast in Progress...</p>
                     <p
                     style={{display: "block"}}
                     >{totalSent} / {recepientList.length}</p>
                     <div>
-                        <div 
+                        <div
                         style={
-                            {height: "100%", 
+                            {height: "100%",
                              width: `${(totalSent / recepientList.length) * 100}%`,
                              borderRadius: "10px",
                              background: 'blue'}}>
@@ -296,19 +296,19 @@ const BroadCast = (props) => {
                 </div>
                 </div> : null
             }
-        </div>: 
+        </div>:
         qrCode['accountStatus'] != 'authenticated' ?
         <div style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
             <img
-            style={{height: "300px", width: "300px"}} 
+            style={{height: "300px", width: "300px"}}
             src={timer == 0 ? require("../../../../assets/reload.png") :  qrCode['qrCode']}/>
-            <div>{timer == 0 ? 
+            <div>{timer == 0 ?
             <p
-            style={{color: "blue", cursor: "pointer"}} 
+            style={{color: "blue", cursor: "pointer"}}
             onClick={startQrCode}>Reload QR code</p> : timer}</div>
         <button
             className="button"
-            style={{background: "blue", color: "white"}} 
+            style={{background: "blue", color: "white"}}
             onClick={() => {startQrCode()}}>
             Authenticate
         </button>
