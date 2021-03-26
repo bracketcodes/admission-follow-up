@@ -112,7 +112,7 @@ const Admin = (props) => {
                     }
                 }}/> */}
                 <Route path="/candidates" component={CandidateList}/>
-                <Route path="/assets" component={AssetManager}/>
+                {/* <Route path="/assets" component={AssetManager}/> */}
                 <Route path="/whatsapp-broadcast" component={BroadCast}/>
                 <Route path={`/`} render={() => {
                     if(isAdmin) {

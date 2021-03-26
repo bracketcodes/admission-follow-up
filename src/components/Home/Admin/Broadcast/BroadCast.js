@@ -77,9 +77,9 @@ const BroadCast = (props) => {
 
             })
         }
-        if(videoList.length == 0) {
-            setVideoList([{link:'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', fileName: 'filenmae'}])
-        }
+        // if(videoList.length == 0) {
+        //     setVideoList([{link:'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', fileName: 'filenmae'}])
+        // }
 
         if(qrCode['accountStatus'] === undefined) {
             startQrCode()
@@ -113,13 +113,12 @@ const BroadCast = (props) => {
         setIsBroadcasting(true)
         let tempTotalSent = 0
         let tempSuccessfullySent = 0
-        console.log(recepientList)
         for (let recepient of recepientList) {
             let data = new FormData()
             console.log('91' + recepient)
             data.append('phone', '91' + recepient)
             data.append('body', String(message).trim() + ' ' + `${video ? String(video.link).trim() : ''}`)
-            axios.post("https://eu9.chat-api.com/instance159432/sendMessage?token=qqvxy98bhlo9j0n4",
+            axios.post("https://eu9.chat-api.com/instance159432/sendLink?token=qqvxy98bhlo9j0n4",
             data=data).
             then(res => {
                 tempTotalSent +=1
@@ -165,7 +164,7 @@ const BroadCast = (props) => {
                 onChange={(event) => {
                     setMessage(event.target.value)
                 }}/>
-                {
+                {/* {
                     video ?
                     <div
                     style={{color: "blue", marginTop: "1rem", textAlign: "left", position: "relative", height: "auto"}}>
@@ -183,7 +182,7 @@ const BroadCast = (props) => {
                 style={{textDecoration: "underline", color: "blue", marginTop: "1rem", textAlign: "left", cursor: "pointer"}}>
                     Attach Video
                 </div>
-                }
+                } */}
                 </div>
                 <button
                 disabled={!message}
